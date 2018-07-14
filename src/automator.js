@@ -2,16 +2,11 @@ const { Chromeless } = require('chromeless');
 
 function run(signInPage, user, pass) {
   let options = {}
-  if (process.env.endpointUrl && process.env.apiKey) {
-    options = {
-      remote: {
-        endpointUrl: process.env.endpointUrl,
-        apiKey: process.env.apiKey,
-      },
-    }
+  const { endpointUrl, apiKey } = process.env
+  if ((endpointUrl && apiKey)) {
+    options = { remote: { endpointUrl, apiKey } };
   }
 
-  console.log(options)
   const chromeless = new Chromeless(options);
 
   return chromeless
